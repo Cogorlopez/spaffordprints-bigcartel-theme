@@ -1,0 +1,45 @@
+<h1>{{ page.name }}</h1>
+{% if errors != blank %}
+  <ul class="errors">
+    {% for error in errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% if cart.items != blank %}
+  <form method="post" action="/cart" id="cart_form" class="cart_form">
+    <ul class="cart_items">
+      {% for item in cart.items %}
+        <li>
+          <a href="{{ item.product.url }}" class="item_image">
+            <img src="{{ item.product.image | product_image_url | constrain: 200, 200 }}" alt="{{ item.product.name }}">
+          </a>
+          <div class="item_details">
+            <a href="{{ item.product.url }}">
+              {{ item.product.name }}
+              {% unless item.product.has_default_option %}
+                <span>{{ item.option.name }}</span>
+              {% endunless %}
+            </a>
+          </div>
+          <div class="item_actions">
+            <div class="quantity">{{ item | item_quantity_input }}</div>
+            <div class="price">{{ item.price | money: theme.money_format }}</div>
+            <div class="remove">
+              <a href="#" data-item-id="{{ item.id }}"><svg class="remove_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.1 14.1" enable-background="new 0 0 14.1 14.1"><path d="M14.1 1.1l-1.1-1.1-6 6-5.9-6-1.1 1.1 6 5.9-6 6 1.1 1.1 5.9-6 6 6 1.1-1.1-6-6z"/></svg></a>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="cart_footer">
+      <h3>Total: <span>{{ cart.total | money: theme.money_format }}</span></h3>
+      <button type="submit" name="checkout" title="Checkout" class="checkout_btn">Checkout</button>
+      <a class="button continue_shopping" href="/products">Continue Shopping</a>
+    </div>
+  </form>
+{% else %}
+	<div class="empty_cart">
+		<p><strong>Your cart is empty!</strong> Sounds like a good time to <a href="/">start shopping.</a></p>
+	</div>
+{% endif %}
