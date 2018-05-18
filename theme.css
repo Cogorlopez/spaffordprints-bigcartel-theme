@@ -977,12 +977,14 @@ ul, ol {
 
 header {
   background: {{ theme.secondary_background }};
-  border-bottom: 1px solid {{ theme.border_color }};
+  /* border-bottom: 1px solid {{ theme.border_color }}; */
   font-family: {{ theme.primary_font | font_family }};
   font-size: 28px;
-  padding: 80px 0;
+  /* padding: 80px 0; */
   margin-bottom: 40px;
-  text-align: {{ theme.header_position }};
+  /* text-align: {{ theme.header_position }}; */
+  background-color: #222;
+  border-color: #080808;
 }
 @media only screen and (max-width: 800px) {
   header {
@@ -997,9 +999,9 @@ header a.store_header {
 }
 header a.store_header.text {
   display: block;
-  line-height: 1.2em;
-  white-space: normal;
-  word-wrap: break-word;
+  /* line-height: 1.2em; */
+  /* white-space: normal; */
+  /* word-wrap: break-word; */
 }
 @media only screen and (max-width: 800px) {
   header a.store_header {
@@ -2534,4 +2536,3 @@ ul.products li a .status {
 /*============================================================
   Custom Styles - add and override styles below.
 ============================================================*/
-
